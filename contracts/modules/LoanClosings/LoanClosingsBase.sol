@@ -889,7 +889,7 @@ contract LoanClosingsBase is State, LoanClosingsEvents, VaultController, Interes
         gasRebate = SafeMath.mul(
             IPriceFeeds(priceFeeds).getFastGasPrice(loanParamsLocal.collateralToken) * 2,
             startingGas - gasleft()
-        );
+        ).div(WEI_PRECISION * WEI_PRECISION);
 
         // ensures the gas rebate will not drop the current margin below the maintenance level
         gasRebate = gasRebate
